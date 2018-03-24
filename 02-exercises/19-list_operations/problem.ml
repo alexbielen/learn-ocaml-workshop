@@ -33,17 +33,17 @@ let my_ints : int list =
 let double_my_ints ints : int list =
   List.map ~f:(fun x -> x * 2) ints
 
-let () = assert (double_my_ints my_ints = [ 2; 4; 6; 8; 10 ])
+let () = assert ([%compare.equal: int list] (double_my_ints my_ints) [ 2; 4; 6; 8; 10 ])
 
 let my_strings ints : string list =
   List.map ~f:Int.to_string ints
 
-let () = assert (my_strings my_ints = [ "1"; "2"; "3"; "4"; "5" ])
+let () = assert ([%compare.equal: string list] (my_strings my_ints) [ "1"; "2"; "3"; "4"; "5" ])
 
 (* Exercise: implement the value [my_new_ints], which is obtained by adding 1 to each
    element of [my_ints] *)
 let my_new_ints ints =
-  failwith "For you to implement"
+  List.map ~f:(fun x -> x + 1) my_ints
 
 (* If the function you want to perform on each element of your list is one that returns
    [unit], meaning that all it does is perform some side-effect (like [printf]),
@@ -79,13 +79,16 @@ let sum_of_my_ints ints : int =
     ~init:0
     ints
 
-let () = assert (sum_of_my_ints my_ints = 15)
+let () = assert ([%compare.equal: int] (sum_of_my_ints my_ints) 15)
 
 (* Exercise: use [List.fold_left] to compute the number of elements of [my_ints] that are
    even *)
 
 let num_even_ints ints =
-  failwith "For you to implement"
+  List.fold_left
+    ~f:(fun cn x -> if ([%compare.equal: int] (Int.rem x 2) 0) then cn + 1 else cn)
+    ~init:0
+    ints
 
 (* Here's one more example of a useful list function: [List.find]:
 
@@ -98,7 +101,7 @@ let num_even_ints ints =
 let first_num_greater_than_3 ints =
   List.find_exn ~f:(fun x -> x > 3) ints
 
-let () = assert (first_num_greater_than_3 my_ints = 4)
+let () = assert ([%compare.equal: int] (first_num_greater_than_3 my_ints) 4)
 
 let%test "Testing my_new_ints..." =
   [%compare.equal: int list] [2;3;4;5;6] (my_new_ints my_ints)
