@@ -13,6 +13,11 @@ let () =
             (5 :: [1;8;4])
             [5;1;8;4])
 
+let () = 
+  assert ([%compare.equal: char list]
+  ('a' :: ['b';'c';'d'])
+  (['a';'b';'c';'d']))
+
 (* The append infix operator @ concatenates two lists:
 
    val (@) : 'a list -> 'a list -> 'a list
@@ -29,8 +34,13 @@ let () =
 
    val range : int -> int -> int list
 *)
+let rec range_helper from to_ list = 
+  if from == to_ 
+  then list 
+  else (range_helper from (to_ - 1) ((to_ -1) :: list) )
+
 let range from to_ =
-  failwith "For you to implement"
+  range_helper from to_ []
 
 (* Here's a different way of getting the [equal] function for a type [t]:
 
