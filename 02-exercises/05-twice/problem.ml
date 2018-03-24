@@ -4,12 +4,12 @@ open! Base
    Recall that the infix operator (+) will add two integers.
 *)
 
-let add1 x = failwith "For you to implement" 
+let add1 x = x + 1
 
 (*
  Let's write a function that squares its argument (multiplies it by itself)
 *)
-let square x = failwith "For you to implement"
+let square x = x * x
 
 (* Functions are first class in OCaml. This means that you can take
    a function and pass it around as an argument to other functions.
@@ -27,14 +27,18 @@ let square x = failwith "For you to implement"
    will not compile, however
    let add2 = add1 (add1 x)
    will compile.
+
+   revApply
 *)
 
-let twice f x = failwith "For you to implement" 
+let twice f x = f (f x) 
+let twiceAgain f x = f x |> f
+let twiceAnotherWay f = Fn.compose f f
 
 (* Now that we have twice, write add2 and raise_to_the_fourth *)
 
-let add2 = failwith "For you to implement" (* Hint: use add1 *)
-let raise_to_the_fourth = failwith "For you to implement" (* Hint: use square *)
+let add2 = Fn.compose add1 add1 
+let raise_to_the_fourth = Fn.compose square square 
 
 let%test "Testing add1..." =
   Int.(=) 5 (add1 4)
@@ -47,6 +51,12 @@ let%test "Testing square..." =
 
 let%test "Testing add1..." =
   Int.(=) 5 (twice add1 3)
+
+let%test "Testing twiceAgain..." = 
+  Int.(=) 5 (twiceAnotherWay add1 3)
+
+let%test "Testing twiceAgain..." = 
+  Int.(=) 5 (twiceAgain add1 3)
 
 let%test "Testing add2..." =
   Int.(=) 1337 (add2 1335)
