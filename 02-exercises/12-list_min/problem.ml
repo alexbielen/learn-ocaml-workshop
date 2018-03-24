@@ -3,11 +3,7 @@ open! Base
 (* This function finds the largest element in a list: *)
 let rec largest xs =
   match xs with
-<<<<<<< HEAD
-  | [] -> Float.neg_infinity
-=======
   | []      -> Float.neg_infinity
->>>>>>> dce8bbec8ca4234c61fdf3223f6a1ee2c85a93f9
   | x :: ys -> Float.max x (largest ys)
 
 (* Let's write a function to find the smallest element: Hint: the opposite of

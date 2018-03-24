@@ -33,28 +33,20 @@ let my_ints : int list =
 let double_my_ints ints : int list =
   List.map ~f:(fun x -> x * 2) ints
 
-<<<<<<< HEAD
-let () = assert ([%compare.equal: int list] (double_my_ints my_ints) [ 2; 4; 6; 8; 10 ])
-=======
 let () =
   assert
     ([%compare.equal: int list]
        (double_my_ints my_ints)
        [ 2; 4; 6; 8; 10 ])
->>>>>>> dce8bbec8ca4234c61fdf3223f6a1ee2c85a93f9
 
 let my_strings ints : string list =
   List.map ~f:Int.to_string ints
 
-<<<<<<< HEAD
-let () = assert ([%compare.equal: string list] (my_strings my_ints) [ "1"; "2"; "3"; "4"; "5" ])
-=======
 let () =
   assert
     ([%compare.equal: string list]
        (my_strings my_ints)
        [ "1"; "2"; "3"; "4"; "5" ])
->>>>>>> dce8bbec8ca4234c61fdf3223f6a1ee2c85a93f9
 
 (* Exercise: implement the value [my_new_ints], which is obtained by adding 1 to each
    element of [my_ints] *)

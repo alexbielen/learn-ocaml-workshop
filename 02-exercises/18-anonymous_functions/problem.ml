@@ -34,13 +34,6 @@ let map_option f opt =
 
 let double i = 2 * i
 
-<<<<<<< HEAD
-let () = 
-  assert ([%compare.equal: int option] (map_option double None) None)
-
-let () = 
-  assert ([%compare.equal: int option] (map_option double (Some 2)) (Some 4))
-=======
 let () =
   assert
     ([%compare.equal: int option]
@@ -52,7 +45,6 @@ let () =
     ([%compare.equal: int option]
        (map_option double (Some 2))
        (Some 4))
->>>>>>> dce8bbec8ca4234c61fdf3223f6a1ee2c85a93f9
 
 (* Instead of defining the function double beforehand, we can use
    an anonymous function.
@@ -63,17 +55,11 @@ let () =
 
    The following has the same effect as above:
 *)
-<<<<<<< HEAD
-let () = 
-  assert ([%compare.equal: int option] (map_option (fun i -> 2 * i) (Some 2)) (Some 4))
-
-=======
 let () =
   assert
     ([%compare.equal: int option]
        (map_option (fun i -> 2 * i) (Some 2))
        (Some 4))
->>>>>>> dce8bbec8ca4234c61fdf3223f6a1ee2c85a93f9
 
 (* Define a function apply_if_nonzero which takes a function from
    int to int and an int, and applies the function if the integer

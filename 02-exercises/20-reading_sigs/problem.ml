@@ -78,6 +78,10 @@ module Fraction : sig
 
   type t
 
+  val create : numerator:int -> denominator:int -> t
+
+  val value : t -> float
+
   (* TODO: Add signatures for the create and value functions to expose them in
      the Fraction module. *)
 
@@ -85,7 +89,7 @@ end = struct
 
   type t = int * int
 
-  let create ~numerator ~denominator = (numerator, denominator)
+  let create ~numerator ~denominator : t = (numerator, denominator)
 
   let value (numerator,denominator) =
     (Float.of_int numerator) /. (Float.of_int denominator)
