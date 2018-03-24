@@ -4,12 +4,18 @@ open! Base
 let rec largest xs =
   match xs with
   | [] -> Float.neg_infinity
-  | x :: ys -> max x (largest ys)
+  | x :: ys -> Float.max x (largest ys)
 
 (* Let's write a function to find the smallest element: Hint: the opposite of
    [Float.neg_infinity] is [Float.infinity]. *)
 let rec smallest xs =
-  failwith "For you to implement"
+  match xs with
+  | []       -> Float.infinity
+  | hd :: tl -> Float.min hd (smallest tl)
+
+
+let%test "Testing largest..." = 
+  Float.equal 5. (largest [1.;2.;3.;4.;5.])
 
 let%test "Testing smallest..." =
   Float.equal Float.infinity (smallest [])

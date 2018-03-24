@@ -11,16 +11,16 @@ let rec every answer combine xs =
 let rec largest xs =
   match xs with
   | [] -> Float.neg_infinity
-  | x :: ys -> max x (largest ys)
+  | x :: ys -> Float.max x (largest ys)
 
 let rec smallest xs =
   match xs with
   | [] -> Float.infinity
-  | x :: ys -> min x (smallest ys)
+  | x :: ys -> Float.min x (smallest ys)
 
 (* Let's rewrite them using every: *)
-let simpler_largest  xs = every (failwith "For you to implement") xs
-let simpler_smallest xs = every (failwith "For you to implement") xs
+let simpler_largest  = every Float.neg_infinity Float.max
+let simpler_smallest = every Float.infinity Float.min
 
 let%test "Testing simpler_smallest..." =
   Float.(=) Float.infinity (simpler_smallest [])

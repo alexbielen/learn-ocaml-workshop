@@ -32,8 +32,8 @@ let rec up_to answer combine x =
   | _ -> combine x (up_to answer combine (x-1))
 
 (* Now we can write our original functions in one line each! *)
-let simpler_add_every_number_up_to x = up_to 0 plus x
-let simpler_factorial x = up_to 1 times x
+let simpler_add_every_number_up_to = up_to 0 plus
+let simpler_factorial = up_to 1 times
 
 (* Note that with infix operators like + and *, you can actually pass them as functions!
    You can do this by writing ( + ) and ( * ). So another way to write the above two
@@ -65,11 +65,13 @@ let rec product xs =
 
 (* Let's write the common parts just once: *)
 let rec every answer combine xs =
-  failwith "For you to implement"
+  match xs with
+  | [] -> answer
+  | hd :: tl -> combine hd (every answer combine tl)
 
 (* Now let's rewrite sum and product in just one line each using every *)
-let simpler_sum xs     = failwith "For you to implement"
-let simpler_product xs = failwith "For you to implement"
+let simpler_sum        = every 0 plus
+let simpler_product    = every 1 times 
 
 let%test "Testing simpler_product..." =
   Int.(=) 1 (simpler_product [])
