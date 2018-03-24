@@ -11,11 +11,6 @@ let example : int_and_string_and_char = (5, "hello", 'A')
 (* You can also extract the components of a tuple: *)
 let (i,s,c) = example
 
-let () =
-  assert (i = 5);
-  assert (s = "hello");
-  assert (c = 'A')
-
 (* Consider a coordinate type containing the x and y values of a coordinate.
    Write a function that computes the sum of two coordinates.
 *)
@@ -23,7 +18,9 @@ type coordinate = int * int
 
 (* TODO *)
 let add coord1 coord2 =
-  failwith "For you to implement"
+  let (x1, y1) = coord1 in 
+  let (x2, y2) = coord2 in 
+  ((x1 + x2), (y1 + y2))
 
 (* Now consider a name type containing strings representing first and last name. *)
 type name = string * string
@@ -55,11 +52,13 @@ let nested_char_pair : (char pair) pair = (('a','b'),('c','d'))
 (* Write functions to extract the first and second elements from a pair. *)
 (* val first : 'a pair -> 'a *)
 (* TODO *)
-let first pair = failwith "For you to implement"
+let first pair = 
+  let (a, _) = pair in a 
 
 (* val second : 'a pair -> 'a *)
 (* TODO *)
-let second pair = failwith "For you to implement"
+let second pair = 
+  let (_, b) = pair in b
 
 (* Notice the cool [%compare.equal: int*int] here! *)
 let%test "Testing add..." =
